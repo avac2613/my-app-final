@@ -24,6 +24,12 @@ const products: Product[] = [
     description: '책상 앞에 붙여두는 보안 체크리스트',
     likes: 8,
   },
+  {
+    id: '4',
+    name: 'C언어 전공서',
+    description: 'C언어에 관해 자세히 써있는 전공서',
+    likes: 3,
+  },
 ]
 
 function delay(ms: number) {
