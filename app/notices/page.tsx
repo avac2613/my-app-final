@@ -34,6 +34,13 @@ export default async function NoticesPage() {
           </li>
         ))}
       </ul>
+
+      <Link
+        href="/"
+        className="text-sm font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+      >
+        /home 페이지로 이동→
+      </Link>
     </div>
   )
 }
