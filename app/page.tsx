@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { Counter } from '../components/Counter'
-
+import { Counter } from '@/components/Counter'
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -10,37 +9,40 @@ export default function Home() {
         </span>
 
         <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
-          웹서버보안프로그래밍 — 조윤서
+          웹서버보안프로그래밍 — 5주차
         </h1>
         <p className="max-w-md text-base leading-7 text-zinc-600 dark:text-zinc-400">
-          create-next-app으로 만든 Next.js 16 App Router 템플릿입니다. 이
-          페이지는 서버에서 렌더링되고, 아래 카운터는 브라우저에서 동작하는
-          별도의 Client Component입니다.
+          이번 주부터 학기 내내 성장할 &ldquo;공지사항 게시판&rdquo; 프로젝트를
+          시작합니다. 상단 메뉴의 &ldquo;공지사항&rdquo;에서 확인해보세요.
         </p>
-
-        {/* Counter는 useState를 쓰는 Client Component 입니다. */}
         <Counter />
 
-        <Link
-          href="/about"
-          className="text-sm font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
-        >
-          /about 페이지로 이동 →
-        </Link>
-
-        <Link
-          href="/products"
-          className="text-sm font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
-        >
-          /products 페이지로 이동 →
-        </Link>
-
-        <Link
-          href="/notices"
-          className="text-sm font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
-        >
-          /notices 페이지로 이동 →
-        </Link>
+        <div className="flex flex-col gap-2 text-sm">
+          <Link
+            href="/notices"
+            className="font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+          >
+            /notices →
+          </Link>
+          <Link
+            href="/about"
+            className="font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+          >
+            /about →
+          </Link>
+          <Link
+            href="/products"
+            className="font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+          >
+            /products →
+          </Link>
+          <Link
+            href="/api/hello"
+            className="font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+          >
+            /api/hello →
+          </Link>
+        </div>
       </main>
     </div>
   )
