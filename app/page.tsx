@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Counter } from '@/components/Counter'
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -9,11 +10,11 @@ export default function Home() {
         </span>
 
         <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
-          웹서버보안프로그래밍 — 5주차
+          웹서버보안프로그래밍 — 7주차
         </h1>
         <p className="max-w-md text-base leading-7 text-zinc-600 dark:text-zinc-400">
-          이번 주부터 학기 내내 성장할 &ldquo;공지사항 게시판&rdquo; 프로젝트를
-          시작합니다. 상단 메뉴의 &ldquo;공지사항&rdquo;에서 확인해보세요.
+          로그인/회원가입 기능. 오른쪽 위 &ldquo;로그인&rdquo; 버튼에서 직접
+          가입하고 로그인해보세요.
         </p>
         <Counter />
 
@@ -23,6 +24,12 @@ export default function Home() {
             className="font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
           >
             /notices →
+          </Link>
+          <Link
+            href="/register"
+            className="font-medium text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+          >
+            /register →
           </Link>
           <Link
             href="/about"
