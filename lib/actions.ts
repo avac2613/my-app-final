@@ -1,12 +1,12 @@
 'use server'
 
-import { likeProduct as likeProductInDb } from '@/lib/products'
 import { revalidatePath } from 'next/cache'
-import { createNotice } from './notices'
 import { redirect } from 'next/navigation'
-import { createUser } from './users'
-import { signIn, signOut } from '@/auth'
 import { AuthError } from 'next-auth'
+import { likeProduct as likeProductInDb } from '@/lib/products'
+import { createNotice } from '@/lib/notices'
+import { createUser } from '@/lib/users'
+import { signIn, signOut } from '@/auth'
 
 export async function likeProductAction(id: string) {
   const newLikes = await likeProductInDb(id)
@@ -20,7 +20,7 @@ export async function createNoticeAction(formData: FormData) {
   const content = String(formData.get('content') ?? '').trim()
 
   if (!title || !author || !content) {
-    throw new Error('제목, 작성자, 내용을 모두 입력해 주세요.')
+    throw new Error('제목, 작성자, 내용을 모두 입력해주세요.')
   }
 
   const notice = await createNotice({ title, author, content })

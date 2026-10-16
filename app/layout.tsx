@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { SiteHeader } from '@/components/SiteHeader'
 import './globals.css'
+import { SiteHeader } from '@/components/SiteHeader'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
