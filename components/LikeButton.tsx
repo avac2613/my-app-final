@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from 'react'
 import { Button } from './ui/button'
-import { likeProductAction } from '@/lib/actions'
 
 export function LikeButton({
   id,
@@ -19,9 +18,8 @@ export function LikeButton({
       variant="outline"
       disabled={isPending}
       onClick={() => {
-        startTransition(async () => {
-          const newLikes = await likeProductAction(id)
-          setLikes(newLikes)
+        startTransition(() => {
+          setLikes((currentLikes) => currentLikes + 1)
         })
       }}
     >
