@@ -3,6 +3,10 @@ import { auth } from '@/auth'
 import { createNoticeAction } from '@/lib/actions'
 import { SubmitButton } from '@/components/SubmitButton'
 
+// middleware.ts가 이미 이 페이지를 로그인 필수로 막고 있지만, 페이지 자체도
+// 세션을 한 번 더 확인합니다(심층 방어). 그리고 어차피 세션이 필요합니다 —
+// 더 이상 "작성자" 입력칸이 없고, 로그인한 사람의 이름을 그대로 보여줄
+// 뿐입니다.
 export default async function NewNoticePage() {
   const session = await auth()
   if (!session?.user) {
@@ -19,6 +23,7 @@ export default async function NewNoticePage() {
         <span className="font-medium text-zinc-700 dark:text-zinc-300">
           {session.user.name}
         </span>{' '}
+        (로그인 세션에서 자동으로 채워집니다 — 직접 입력하지 않습니다)
       </p>
       <form action={createNoticeAction} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">

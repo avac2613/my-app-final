@@ -1,3 +1,8 @@
+// 6주차의 MongoDB 조회 위에, 9주차부터 "누가 썼는가"가 추가됩니다.
+// author(자유 입력 텍스트) 대신 authorId/authorName을 저장합니다 — 이 값은
+// 사용자가 폼에 입력하는 게 아니라 로그인 세션에서 서버가 채워 넣습니다
+// (lib/actions.ts의 createNoticeAction 참고).
+
 import { connectDB } from './mongodb'
 import { Notice as NoticeModel } from '@/models/Notice'
 
@@ -31,6 +36,9 @@ function toNotice(doc: NoticeDocLike): Notice {
   }
 }
 
+// 8주차까지는 컬렉션이 비어있을 때 예시 데이터를 자동으로 채워 넣었지만,
+// 이제는 실제로 로그인한 사용자가 글을 씁니다. 더 이상 가짜 작성자로
+// 시드하지 않고, 대신 화면(app/notices/page.tsx)에서 빈 상태를 안내합니다.
 export async function getNotices(): Promise<Notice[]> {
   await connectDB()
   const docs = await NoticeModel.find().sort({ createdAt: -1 }).lean()
@@ -43,6 +51,7 @@ export async function getNotice(id: string): Promise<Notice | undefined> {
     const doc = await NoticeModel.findById(id).lean()
     return doc ? toNotice(doc as NoticeDocLike) : undefined
   } catch {
+    // id가 MongoDB ObjectId 형식이 아니면 findById가 에러를 던집니다.
     return undefined
   }
 }

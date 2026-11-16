@@ -1,33 +1,12 @@
 import Link from 'next/link'
-import { cookies } from 'next/headers'
 import { auth } from '@/auth'
+import { getCartLines } from '@/lib/carts'
 import { getProductsByIds } from '@/lib/products'
 import {
   updateCartQtyAction,
   removeFromCartAction,
   checkoutAction,
 } from '@/lib/actions'
-
-async function getCartLines(): Promise<{ productId: string; qty: number }[]> {
-  const cookieStore = await cookies()
-  const value = cookieStore.get('cart')?.value
-
-  if (!value) return []
-
-  try {
-    const parsed: unknown = JSON.parse(value)
-    if (!Array.isArray(parsed)) return []
-
-    return parsed.filter(
-      (line): line is { productId: string; qty: number } =>
-        typeof line?.productId === 'string' &&
-        Number.isInteger(line?.qty) &&
-        line.qty > 0,
-    )
-  } catch {
-    return []
-  }
-}
 
 // 장바구니 조회는 로그인 여부와 무관하게 누구나 볼 수 있습니다(lib/cart.ts의
 // 쿠키 기반 구현 참고). 쿠키에는 { productId, qty } 목록만 저장되어
@@ -40,7 +19,7 @@ async function getCartLines(): Promise<{ productId: string; qty: number }[]> {
 // 필요합니다 — 그래야 "누구의 주문인지" 서버가 알 수 있습니다.
 export default async function CartPage() {
   const session = await auth()
-  const lines = await getCartLines()
+  const lines: { productId: string; qty: number }[] = await getCartLines()
   const products = await getProductsByIds(lines.map((line) => line.productId))
 
   const items = lines

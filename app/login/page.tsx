@@ -1,7 +1,10 @@
-import { SubmitButton } from '@/components/SubmitButton'
-import { loginAction } from '@/lib/actions'
 import Link from 'next/link'
+import { loginAction } from '@/lib/actions'
+import { SubmitButton } from '@/components/SubmitButton'
 
+// Next.js 16에서 searchParams도 params처럼 Promise입니다 — await가 필요합니다.
+// loginAction이 로그인에 실패하면 /login?error=1 로 돌려보내는데, 그 값을
+// 여기서 읽어서 에러 메시지를 보여줍니다.
 type Props = { searchParams: Promise<{ error?: string }> }
 
 export default async function LoginPage({ searchParams }: Props) {

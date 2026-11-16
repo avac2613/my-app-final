@@ -15,7 +15,7 @@ import {
   getCartLines,
   clearCart,
 } from '@/lib/carts'
-import { Order } from '@/models/Order'
+import { createOrder } from '@/lib/orders'
 import { createNotice, deleteNotice, getNotice } from '@/lib/notices'
 import { createUser } from '@/lib/users'
 import { signIn, signOut, auth } from '@/auth'
@@ -86,7 +86,7 @@ export async function checkoutAction() {
     redirect('/login')
   }
 
-  const lines = await getCartLines()
+  const lines: { productId: string; qty: number }[] = await getCartLines()
   if (lines.length === 0) {
     throw new Error('장바구니가 비어 있습니다.')
   }
@@ -113,7 +113,7 @@ export async function checkoutAction() {
     throw new Error('주문할 수 있는 상품이 없습니다(품절되었을 수 있습니다).')
   }
 
-  const order = await Order.create({ userId: session.user.id, items })
+  const order = await createOrder(session.user.id, items)
   await Promise.all(
     items.map((item) => decrementStock(item.productId, item.qty)),
   )

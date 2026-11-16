@@ -1,6 +1,9 @@
 import { registerAction } from '@/lib/actions'
 import { SubmitButton } from '@/components/SubmitButton'
 
+// app/notices/new/page.tsx와 완전히 같은 패턴입니다: Server Component +
+// <form action={...}>. 이번에는 비밀번호를 다루므로 lib/users.ts의
+// createUser에서 bcrypt로 해싱한 뒤에만 DB에 저장합니다.
 export default function RegisterPage() {
   return (
     <div className="mx-auto flex max-w-sm flex-1 flex-col gap-6 px-8 py-16">
